@@ -1,0 +1,70 @@
+set ruler
+set showcmd
+set wildmenu " display possible completion in a line
+
+set ttimeout " timeout on key codes
+
+set display=truncate
+
+set scrolloff=5 " always show some context
+
+if has('reltime')
+	set incsearch
+endif
+set smartcase
+set showmatch
+
+" Do not recognize octal numbers for Ctrl-A and Ctrl-X
+set nrformats-=octal
+
+" Don't use Ex mode, use Q for formatting.
+" Revert with ":unmap Q".
+map Q gq
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+" Revert with ":iunmap <C-U>".
+inoremap <C-U> <C-G>u<C-U>
+
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  let c_comment_strings=1
+endif
+
+
+" mouse support 'break' my copy/paste workflow
+" in terminals
+if !has('gui_running')
+	set mouse=
+endif
+
+if has('autocmd')
+	filetype plugin indent on
+
+	" reset last position when reopen file
+	augroup vimStartup
+		au!
+
+		autocmd BufReadPost *
+			\ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+			\ |   exe "normal! g`\""
+			\ | endif
+
+	augroup END
+
+endif
+
+" indent
+set tabstop=4
+set shiftwidth=4
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+" Revert with: ":delcommand DiffOrig".
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+          \ | wincmd p | diffthis
+endif
+
+set nolangremap

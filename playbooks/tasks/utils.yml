@@ -1,0 +1,13 @@
+- name: install basic tools
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - flatpak
+    - keepassxc
+    - htop
+    - vim
+- name: set flathub repo
+  command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  args:
+    creates: /var/lib/flatpak/repo/refs/remotes/flathub

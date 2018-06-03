@@ -1,0 +1,7 @@
+Package: firefox*
+Pin: release a=unstable
+Pin-Priority: 900
+
+Package: chromium chromium-*
+Pin: release a=unstable
+Pin-Priority: 900

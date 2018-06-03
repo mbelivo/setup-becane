@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    fullname: Marcel Belivo
+    email: naenga@protonmail.com
+  tasks:
+    - name: git config
+      template:
+        src: files/dot_gitconfig.j2
+        dest: ~/.gitconfig
+    - name: vim config
+      copy:
+        src: files/dot_vimrc
+        dest: ~/.vimrc

@@ -1,0 +1,9 @@
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - import_tasks: tasks/debian_suites.yml
+  handlers:
+    - name: update apt cache
+      apt:
+        update_cache: yes

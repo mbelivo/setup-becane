@@ -1,0 +1,7 @@
+- import_tasks: nodesource_repo.yml
+  vars:
+    node_version: 8 
+- name: install nodejs
+  apt:
+    name: nodejs
+    state: present

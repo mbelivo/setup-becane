@@ -1,0 +1,9 @@
+- name: install dev packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - make
+    - gcc
+    - git
+- import_tasks: vscode.yml

@@ -1,0 +1,5 @@
+---
+- import_playbook: playbooks/set_debian_testing.yml
+- import_playbook: playbooks/set_system.yml
+- import_playbook: playbooks/sys_hardening.yml
+- import_playbook: playbooks/set_user.yml

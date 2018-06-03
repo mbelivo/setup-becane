@@ -1,0 +1,13 @@
+- name: add microsoft apt key
+  apt_key:
+    data: "{{ lookup('file', 'files/microsoft-apt-archive.gpg') }}"
+    state: present
+- name: add microsoft repository
+  apt_repository:
+    repo: deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
+    state: present
+    filename: vscode
+- name: install vscode
+  apt:
+    name: code
+    state: latest

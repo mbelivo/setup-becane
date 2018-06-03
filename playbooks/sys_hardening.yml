@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: install mac and firewall
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - ufw
+        - apparmor
+        - apparmor-notify
+        - apparmor-profiles
+        - apparmor-profiles-extra
+        - apparmor-utils
+    - name: enable firewall
+      ufw:
+        state: enabled
+    - name: set incoming policy
+      ufw:
+        policy: deny
+        direction: incoming
+    - name: set outgoing policy
+      ufw:
+        policy: allow
+        direction: outgoing
+    - name: limit kptr exposure
+      sysctl:
+        name: kernel.kptr_restrict
+        value: 2
+

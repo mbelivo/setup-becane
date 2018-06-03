@@ -1,0 +1,12 @@
+- name: pin browsers to unstable
+  copy:
+    src: files/apt-pref-browsers
+    dest: /etc/apt/preferences.d/browsers
+- name: Install browsers
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - firefox
+    - chromium
+- import_tasks: firefox_devedition.yml

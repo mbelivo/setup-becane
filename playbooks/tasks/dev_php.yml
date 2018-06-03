@@ -1,0 +1,13 @@
+- name: install php dev packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php-cli
+    - php-intl
+    - php-mbstring
+    - php-sqlite3
+    - php-xdebug
+    - php-xml
+    - php-codesniffer
+    - composer
