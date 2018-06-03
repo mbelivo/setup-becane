@@ -1,0 +1,9 @@
+- name: install extra utils
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - filezilla # ftp client
+    - gnome-boxes # vm manager
+    - lynis # security config checker
+    - mtr # network diagnostic

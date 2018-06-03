@@ -1,0 +1,9 @@
+- name: install usefull packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - flake8
+    - pylint
+    - pylint3
+    #- wfrench # french wordlist?

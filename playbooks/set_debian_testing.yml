@@ -2,7 +2,25 @@
   connection: local
   become: true
   tasks:
-    - import_tasks: tasks/debian_suites.yml
+    - name: set base testing sources.list
+      copy:
+        src: files/apt-testing-sources.list
+        dest: /etc/apt/sources.list
+      notify: update apt cache
+    - name: set releases priority
+      copy:
+        src: files/apt-pref-suites
+        dest: /etc/apt/preferences.d/suites
+    - name: add unstable repo
+      apt_repository:
+        repo: deb http://ftp.fr.debian.org/debian unstable main contrib non-free
+        filename: unstable
+        state: present
+    - name: add experimental repo
+      apt_repository:
+        repo: deb http://ftp.fr.debian.org/debian experimental main contrib non-free
+        filename: experimental
+      state: present
   handlers:
     - name: update apt cache
       apt:
