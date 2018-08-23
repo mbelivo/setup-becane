@@ -5,6 +5,7 @@
   with_items:
     - php-ast
     - php-cli
+    - php-curl
     - php-intl
     - php-mbstring
     - php-sqlite3
