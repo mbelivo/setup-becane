@@ -20,7 +20,7 @@
       apt_repository:
         repo: deb http://ftp.fr.debian.org/debian experimental main contrib non-free
         filename: experimental
-      state: present
+        state: present
   handlers:
     - name: update apt cache
       apt:
